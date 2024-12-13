@@ -1,0 +1,48 @@
+<ion-app>
+  <!-- Menú principal -->
+  <ion-menu contentId="main" menuId="principal">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>CONTENIDO</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="ion-padding">
+      <ion-list id="inbox-list">
+        <!-- Encabezado del menú -->
+        <ion-list-header>Diego Duré</ion-list-header>
+        <ion-note>yeyo.gabriel&#64;gmail.com</ion-note>
+
+        <!-- Ítems dinámicos del menú -->
+        <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
+          <ion-item
+            routerDirection="root"
+            [routerLink]="['/home', p.url]"
+            lines="none"
+            detail="false"
+            routerLinkActive="selected"
+          >
+            <ion-icon
+              slot="start"
+              [ios]="p.icon + '-outline'"
+              [md]="p.icon + '-sharp'"
+              aria-hidden="true"
+            ></ion-icon>
+            <ion-label>{{ p.title }}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <!-- Opción de cerrar sesión -->
+        <ion-menu-toggle>
+          <ion-item button="true" detail="true" (click)="logOut()">
+            <ion-icon slot="start" name="log-out-outline"></ion-icon>
+            <ion-label>Salir</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <!-- Área de contenido donde se renderizan las páginas -->
+  <ion-router-outlet id="main"></ion-router-outlet>
+</ion-app>
